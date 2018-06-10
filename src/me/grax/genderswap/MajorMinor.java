@@ -45,7 +45,7 @@ public class MajorMinor {
             int key = shortMessage.getData1();
             int vel = shortMessage.getData2();
             if (s.isOnScale(key)) {
-              while (!newScale.isOnScale(key)) {
+              while (!newScale.isOnScale(key) && key >= 0) {
                 key--;
                 shortMessage.setMessage(shortMessage.getCommand(), channel, key, vel);
                 changedKeys++;
