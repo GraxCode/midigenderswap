@@ -41,17 +41,15 @@ public class MajorMinor {
           MidiEvent e = t.get(i);
           if (e.getMessage() instanceof ShortMessage) {
             ShortMessage shortMessage = (ShortMessage) e.getMessage();
-            if (shortMessage.getCommand() == ShortMessage.NOTE_ON) {
-              int channel = shortMessage.getChannel();
-              int key = shortMessage.getData1();
-              int vel = shortMessage.getData2();
-              if (vel > 0 && key > -1) {
-                if (s.isOnScale(key)) {
-                  while (!newScale.isOnScale(key)) {
-                    key--;
-                    shortMessage.setMessage(shortMessage.getCommand(), channel, key, vel);
-                    changedKeys++;
-                  }
+            int channel = shortMessage.getChannel();
+            int key = shortMessage.getData1();
+            int vel = shortMessage.getData2();
+            if (vel > 0 && key > -1) {
+              if (s.isOnScale(key)) {
+                while (!newScale.isOnScale(key)) {
+                  key--;
+                  shortMessage.setMessage(shortMessage.getCommand(), channel, key, vel);
+                  changedKeys++;
                 }
               }
             }
